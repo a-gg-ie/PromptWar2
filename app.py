@@ -288,6 +288,5 @@ def myth():
 # ─────────────────────────────────────────────
 
 if __name__ == "__main__":
-    # debug=True gives helpful error messages during development
-    # Set debug=False before deploying to production
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=False)
