@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoteSmartIndia — Your Election Guide</title>
+  <meta name="description" content="A free, interactive guide helping first-time Indian voters understand the full election process — from registration to results." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🗳️</span>
+        <span class="logo-text">VoteSmartIndia</span>
+      </div>
+      <p class="logo-tagline">Your friendly guide to India's elections</p>
+    </div>
+
+    <!-- Sticky navigation tabs -->
+    <nav class="tab-nav" role="navigation" aria-label="Main sections">
+      <button class="tab-btn active" data-target="chat"        id="nav-chat">💬 Ask a Question</button>
+      <button class="tab-btn"        data-target="timeline"    id="nav-timeline">🗓 Election Timeline</button>
+      <button class="tab-btn"        data-target="eligibility" id="nav-eligibility">✅ Am I Eligible?</button>
+      <button class="tab-btn"        data-target="myth"        id="nav-myth">🔍 Myth vs Fact</button>
+    </nav>
+  </header>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <main class="main-content">
+
+    <!-- ══════════════════════════════════════════
+         SECTION 1 — CHAT
+    ══════════════════════════════════════════ -->
+    <section id="section-chat" class="section active" aria-labelledby="chat-heading">
+      <div class="section-header">
+        <h1 id="chat-heading">💬 Ask Anything About Elections</h1>
+        <p>Type your question in plain English — I'll explain it simply for you.</p>
+      </div>
+
+      <!-- Chat message window -->
+      <div class="chat-window" id="chat-window" role="log" aria-live="polite" aria-label="Chat messages">
+        <!-- Welcome message shown by default -->
+        <div class="chat-bubble ai" id="welcome-bubble">
+          <div class="bubble-avatar">🤖</div>
+          <div class="bubble-body">
+            <p>Namaste! 👋 I'm your Indian election guide. Ask me anything — like <em>"How do I register to vote?"</em>, <em>"What is NOTA?"</em>, or <em>"How does EVM work?"</em></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input bar -->
+      <div class="chat-input-bar">
+        <input
+          type="text"
+          id="chat-input"
+          class="chat-input"
+          placeholder="e.g. What documents do I need to vote?"
+          aria-label="Type your election question"
+          autocomplete="off"
+          maxlength="500"
+        />
+        <button id="chat-send-btn" class="btn-primary" aria-label="Send question">
+          <span class="btn-label">Send</span>
+          <span class="btn-icon">➤</span>
+        </button>
+      </div>
+      <p class="input-hint">Press <kbd>Enter</kbd> or click Send · Questions are anonymous</p>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SECTION 2 — ELECTION TIMELINE
+    ══════════════════════════════════════════ -->
+    <section id="section-timeline" class="section" aria-labelledby="timeline-heading">
+      <div class="section-header">
+        <h2 id="timeline-heading">🗓 The Election Journey</h2>
+        <p>Click any step below to learn what happens at each stage of an Indian election.</p>
+      </div>
+
+      <!-- Timeline step cards — built by JS -->
+      <div class="timeline-track" id="timeline-track" role="list" aria-label="Election timeline steps">
+        <div class="timeline-loading">Loading timeline…</div>
+      </div>
+
+      <!-- Detail panel that expands below the selected step -->
+      <div class="timeline-detail" id="timeline-detail" aria-live="polite" hidden>
+        <button class="detail-close" id="timeline-close-btn" aria-label="Close detail">✕</button>
+        <div class="detail-icon" id="detail-icon"></div>
+        <h3 class="detail-title" id="detail-title"></h3>
+        <p class="detail-text" id="detail-text"></p>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SECTION 3 — VOTER ELIGIBILITY CHECKER
+    ══════════════════════════════════════════ -->
+    <section id="section-eligibility" class="section" aria-labelledby="eligibility-heading">
+      <div class="section-header">
+        <h2 id="eligibility-heading">✅ Voter Eligibility Checker</h2>
+        <p>Answer 3 quick questions to find out if you can vote in India.</p>
+      </div>
+
+      <form id="eligibility-form" class="eligibility-form" novalidate>
+
+        <!-- Q1: Age -->
+        <div class="form-group">
+          <label for="age-input" class="form-label">
+            <span class="q-num">1</span>
+            How old are you?
+          </label>
+          <input
+            type="number"
+            id="age-input"
+            name="age"
+            class="form-input"
+            placeholder="Enter your age"
+            min="1"
+            max="120"
+            required
+            aria-required="true"
+          />
+        </div>
+
+        <!-- Q2: Citizenship -->
+        <div class="form-group">
+          <label class="form-label">
+            <span class="q-num">2</span>
+            Are you an Indian citizen?
+          </label>
+          <div class="radio-group" role="radiogroup" aria-label="Indian citizenship">
+            <label class="radio-option">
+              <input type="radio" name="citizen" id="citizen-yes" value="yes" aria-label="Yes, I am an Indian citizen" /> Yes
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="citizen" id="citizen-no"  value="no"  aria-label="No, I am not an Indian citizen" /> No
+            </label>
+          </div>
+        </div>
+
+        <!-- Q3: Residency -->
+        <div class="form-group">
+          <label class="form-label">
+            <span class="q-num">3</span>
+            Do you have a registered address in India?
+          </label>
+          <div class="radio-group" role="radiogroup" aria-label="Registered address in India">
+            <label class="radio-option">
+              <input type="radio" name="resident" id="resident-yes" value="yes" aria-label="Yes, I have a registered address" /> Yes
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="resident" id="resident-no"  value="no"  aria-label="No, I don't have a registered address" /> No
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary btn-block" id="eligibility-submit-btn">
+          Check My Eligibility ➤
+        </button>
+      </form>
+
+      <!-- Result card shown after form submission -->
+      <div class="result-card" id="eligibility-result" aria-live="polite" hidden>
+        <div class="result-title" id="result-title"></div>
+        <p class="result-message" id="result-message"></p>
+        <div class="result-next" id="result-next"></div>
+        <button class="btn-secondary" id="eligibility-reset-btn">Check Again</button>
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         SECTION 4 — MYTH VS FACT
+    ══════════════════════════════════════════ -->
+    <section id="section-myth" class="section" aria-labelledby="myth-heading">
+      <div class="section-header">
+        <h2 id="myth-heading">🔍 Myth vs Fact Checker</h2>
+        <p>Heard something about elections that sounds suspicious? Type it here and I'll tell you the truth.</p>
+      </div>
+
+      <div class="myth-examples">
+        <p class="examples-label">Try these:</p>
+        <div class="example-chips">
+          <button class="chip" id="chip-1" data-myth="EVMs can be hacked remotely">EVMs can be hacked remotely</button>
+          <button class="chip" id="chip-2" data-myth="You need a Voter ID card to vote">You need only a Voter ID to vote</button>
+          <button class="chip" id="chip-3" data-myth="Voting is compulsory in India">Voting is compulsory in India</button>
+        </div>
+      </div>
+
+      <div class="myth-input-area">
+        <textarea
+          id="myth-input"
+          class="myth-textarea"
+          placeholder="Type an election myth or statement here…"
+          rows="3"
+          maxlength="500"
+          aria-label="Type an election myth or statement"
+        ></textarea>
+        <button id="myth-check-btn" class="btn-primary btn-block">
+          Check This Statement ➤
+        </button>
+      </div>
+
+      <!-- Verdict card shown after checking -->
+      <div class="verdict-card" id="verdict-card" aria-live="polite" hidden>
+        <div class="verdict-badge" id="verdict-badge"></div>
+        <p class="verdict-explanation" id="verdict-explanation"></p>
+        <button class="btn-secondary" id="myth-reset-btn">Check Another</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer class="site-footer">
+    <p>Made for first-time voters in India 🇮🇳 · Powered by Google Gemini AI</p>
+    <p class="footer-links">
+      <a href="https://voterportal.eci.gov.in" target="_blank" rel="noopener">Voter Portal</a> ·
+      <a href="https://eci.gov.in"             target="_blank" rel="noopener">ECI Website</a> ·
+      <a href="https://ecisveep.nic.in"        target="_blank" rel="noopener">SVEEP (Voter Education)</a>
+    </p>
+    <p class="footer-disclaimer">This app is for educational purposes only and is not affiliated with the Election Commission of India.</p>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

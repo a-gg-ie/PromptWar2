@@ -12,8 +12,9 @@ from flask import Flask, request, jsonify, render_template
 from dotenv import load_dotenv
 load_dotenv()
 
-# Google Generative AI (Gemini)
-import google.generativeai as genai
+# Google Generative AI (Gemini) — new official SDK
+from google import genai
+from google.genai import types
 
 # Google Sheets (optional — app works even if this fails)
 try:
@@ -29,10 +30,11 @@ except ImportError:
 
 app = Flask(__name__)
 
-# Configure Gemini with the API key from .env
+# Read Gemini API key from .env
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
-if GEMINI_API_KEY:
-    genai.configure(api_key=GEMINI_API_KEY)
+
+# Build the Gemini client (will be None if no key is set)
+gemini_client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 
 # This is the system prompt that shapes the AI's personality and behaviour
 SYSTEM_PROMPT = (
@@ -102,15 +104,21 @@ def ask_gemini(user_message, extra_instructions=""):
     Combines the global system prompt with any extra task-specific instructions.
     Returns an error string if the API call fails.
     """
-    if not GEMINI_API_KEY:
+    if not gemini_client:
         return "❌ Gemini API key not configured. Please add GEMINI_API_KEY to your .env file."
 
     try:
-        model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
-            system_instruction=SYSTEM_PROMPT + " " + extra_instructions,
+        system_text = SYSTEM_PROMPT
+        if extra_instructions:
+            system_text += " " + extra_instructions
+
+        response = gemini_client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=user_message,
+            config=types.GenerateContentConfig(
+                system_instruction=system_text,
+            ),
         )
-        response = model.generate_content(user_message)
         return response.text.strip()
     except Exception as e:
         return f"❌ Sorry, I couldn't get an answer right now. Error: {str(e)}"
