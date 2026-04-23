@@ -1,0 +1,37 @@
+[
+  {
+    "id": "nomination",
+    "label": "Nomination",
+    "icon": "📋",
+    "short": "Candidates file their papers to contest the election.",
+    "detail": "During the nomination phase, any eligible Indian citizen who wants to contest an election files a 'nomination paper' with the Election Commission. This includes paying a security deposit and getting a certain number of voters to support your candidacy. The Election Commission then scrutinises and accepts or rejects these forms. Your next step: Check if your local MLA or MP filed their nomination on the ECI website — eci.gov.in."
+  },
+  {
+    "id": "campaigning",
+    "label": "Campaigning",
+    "icon": "📣",
+    "short": "Candidates reach out to voters and share their vision.",
+    "detail": "Campaigning is the period when candidates travel across their constituency, hold rallies, door-to-door meetings, and run advertisements to win voter trust. The Election Commission enforces a strict Model Code of Conduct during this phase — no free gifts, no hate speech, and fair spending limits. Campaigning officially ends 48 hours before polling day, a period called 'election silence'. Your next step: Follow the Election Commission's MCC guidelines at eci.gov.in to understand what is and isn't allowed."
+  },
+  {
+    "id": "voting",
+    "label": "Voting Day",
+    "icon": "🗳️",
+    "short": "Registered voters cast their ballots at polling booths.",
+    "detail": "On voting day, registered voters visit their assigned polling booth, show a valid ID (Voter ID, Aadhaar, passport, etc.), and cast their vote using an Electronic Voting Machine (EVM). Everything is overseen by Election Commission officials and independent observers to ensure fairness. A special VVPAT machine also prints a paper slip so you can verify your vote was recorded correctly. Your next step: Find your polling booth and voter ID status at voterportal.eci.gov.in."
+  },
+  {
+    "id": "counting",
+    "label": "Counting",
+    "icon": "🔢",
+    "short": "All votes from EVMs are tallied under strict supervision.",
+    "detail": "After voting ends, EVMs are sealed and stored securely until counting day. On counting day, trained officials unseal and tally the votes from every booth in a constituency under the watch of Election Commission observers. Each candidate's agent is also present to ensure transparency. Vote counting typically begins at 8 AM and results start emerging within a few hours. Your next step: On counting day, follow live updates on the ECI results portal — results.eci.gov.in."
+  },
+  {
+    "id": "results",
+    "label": "Results",
+    "icon": "🏆",
+    "short": "The winning candidate is declared and takes office.",
+    "detail": "Once all votes are counted, the candidate with the most votes in a constituency wins — India uses the 'First Past the Post' system, meaning you don't need a majority, just more votes than everyone else. The Returning Officer then formally declares the winner and issues a certificate of election. The winning party (or coalition) with the most seats then forms the government. Your next step: Learn how governments are formed at the ECI's voter education portal — ecisveep.nic.in."
+  }
+]
